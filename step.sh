@@ -6,4 +6,5 @@ ruby "${THIS_SCRIPT_DIR}/step.rb" \
 	-s "${xamarin_solution}" \
 	-c "${xamarin_configuration}" \
 	-l "${xamarin_platform}" \
-	-o "${nunit_options}"
+	-o "${nunit_options}" \
+    -u "${run_ui_tests}"

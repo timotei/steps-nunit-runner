@@ -55,13 +55,14 @@ class Builder
     @generated_files = analyzer.collect_generated_files(@configuration, @platform, @project_type_filter)
   end
 
-  def run_nunit_tests(options = nil)
+  def run_nunit_tests(options = nil, uitests = false)
     analyzer = Analyzer.new
     analyzer.analyze(@path)
 
-    test_commands = analyzer.nunit_test_commands(@configuration, @platform, options)
+    test_commands = analyzer.nunit_test_commands(@configuration, @platform, options, uitests)
 
     raise 'No projects found to test' if test_commands.empty?
+    puts ">>>>>>>>>> TESTS #{test_commands}"
     test_commands.each_with_index do |test_command, idx|
       puts
       puts "\e[34m#{test_command}\e[0m"

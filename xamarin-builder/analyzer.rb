@@ -155,7 +155,7 @@ class Analyzer
     build_command
   end
 
-  def nunit_test_commands(config, platform, options)
+  def nunit_test_commands(config, platform, options, uitests)
     configuration = "#{config}|#{platform}"
     build_commands = []
 
@@ -169,6 +169,7 @@ class Analyzer
       project_config = project_configuration.split('|').first
 
       next if project[:tests].nil? || !project[:tests].include?('nunit')
+      next if !uitests && project[:tests].include?('uitest')
       next unless project_configuration
 
       command = [

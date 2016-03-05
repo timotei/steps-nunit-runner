@@ -32,7 +32,8 @@ end
 options = {
     solution: nil,
     configuration: nil,
-    platform: nil
+    platform: nil,
+    uitests: false,
 }
 
 parser = OptionParser.new do |opts|
@@ -41,6 +42,7 @@ parser = OptionParser.new do |opts|
   opts.on('-c', '--configuration config', 'Configuration') { |c| options[:configuration] = c unless c.to_s == '' }
   opts.on('-l', '--platform platform', 'Platform') { |l| options[:platform] = l unless l.to_s == '' }
   opts.on('-o', '--options options', 'NUnit options') { |o| options[:options] = o unless o.to_s == '' }
+  opts.on('-u', '--run-ui-tests', 'Run UI Tests') { |u| options[:uitests] = u unless u.to_s == '' }
   opts.on('-h', '--help', 'Displays Help') do
     exit
   end
@@ -54,6 +56,7 @@ puts '========== Configs =========='
 puts " * solution: #{options[:solution]}"
 puts " * configuration: #{options[:configuration]}"
 puts " * platform: #{options[:platform]}"
+puts " * ui tests: #{options[:uitests]}"
 
 #
 # Validate options
@@ -69,7 +72,7 @@ begin
   builder.build_solution
 
   # Executing NUnit tests
-  builder.run_nunit_tests(options[:options])
+  builder.run_nunit_tests(options[:options], options[:uitests])
 rescue => ex
   fail_with_message("NUnit test failed: #{ex}")
 end

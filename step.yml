@@ -33,6 +33,15 @@ inputs:
       description: |
         Xamarin platform
       is_required: true
+  - run_ui_tests: "no"
+    opts:
+      title: Run UI tests
+      description: |
+        If true, will run UI tests also, otherwise it will skip UI Test projects
+      value_options:
+        - yes
+        - no
+      is_required: true
   - nunit_options:
     opts:
       title: "NUnit command options"
