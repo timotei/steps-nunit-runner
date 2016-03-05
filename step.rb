@@ -42,7 +42,7 @@ parser = OptionParser.new do |opts|
   opts.on('-c', '--configuration config', 'Configuration') { |c| options[:configuration] = c unless c.to_s == '' }
   opts.on('-l', '--platform platform', 'Platform') { |l| options[:platform] = l unless l.to_s == '' }
   opts.on('-o', '--options options', 'NUnit options') { |o| options[:options] = o unless o.to_s == '' }
-  opts.on('-u', '--run-ui-tests', 'Run UI Tests') { |u| options[:uitests] = u unless u.to_s == '' }
+  opts.on('-u', '--run-ui-tests flag', 'Run UI Tests') { |u| options[:uitests] = to_bool(u) }
   opts.on('-h', '--help', 'Displays Help') do
     exit
   end
